@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#fbf6f0">
+  <meta name="description" content="繁花美學｜美甲、美睫與日常美感提案。">
+  <title>繁花美學｜讓美，成為日常</title>
+  <style>
+    :root {
+      --paper: #fbf6f0;
+      --paper-deep: #f3e7dd;
+      --ink: #453c3d;
+      --muted: #817477;
+      --rose: #b97979;
+      --rose-deep: #8f5c64;
+      --sage: #8b9b8b;
+      --line: rgba(69, 60, 61, .13);
+      --shadow: 0 18px 48px rgba(113, 78, 72, .13);
+      --radius: 24px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+      font-size: 16px;
+      line-height: 1.75;
+    }
+    button { font: inherit; }
+    a { color: inherit; text-decoration: none; }
+
+    .site-header {
+      position: fixed;
+      z-index: 10;
+      top: 0;
+      right: 0;
+      left: 0;
+      padding: 12px 16px;
+      background: rgba(251, 246, 240, .9);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(14px);
+    }
+    .nav-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1080px;
+      margin: auto;
+      gap: 10px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      flex: 0 0 auto;
+      gap: 8px;
+      color: var(--rose-deep);
+      font-weight: 700;
+      letter-spacing: .12em;
+      white-space: nowrap;
+    }
+    .brand-mark { font-size: 21px; }
+    .brand-name { font-size: 14px; }
+    .main-nav {
+      display: flex;
+      flex: 1;
+      justify-content: flex-end;
+      gap: 2px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .main-nav::-webkit-scrollbar { display: none; }
+    .nav-link {
+      border: 0;
+      border-radius: 999px;
+      padding: 7px 9px;
+      color: var(--muted);
+      background: transparent;
+      cursor: pointer;
+      font-size: 12px;
+      letter-spacing: .02em;
+      white-space: nowrap;
+      transition: color .25s ease, background .25s ease;
+    }
+    .nav-link:hover, .nav-link.is-active { color: var(--rose-deep); background: var(--paper-deep); }
+
+    main { max-width: 1080px; margin: auto; padding: 82px 20px 48px; }
+    .page {
+      display: none;
+      min-height: calc(100vh - 130px);
+    }
+    .page.is-active { display: block; animation: page-in .45s ease both; }
+    @keyframes page-in { from { opacity: .01; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
+    .hero {
+      display: grid;
+      align-items: center;
+      min-height: calc(100vh - 150px);
+      padding: 34px 0 56px;
+      gap: 32px;
+    }
+    .eyebrow {
+      margin: 0 0 12px;
+      color: var(--rose);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .22em;
+    }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 {
+      max-width: 590px;
+      margin-bottom: 20px;
+      font-size: clamp(40px, 12vw, 78px);
+      font-weight: 500;
+      letter-spacing: .08em;
+      line-height: 1.18;
+    }
+    h1 em { color: var(--rose-deep); font-style: normal; }
+    .lead { max-width: 470px; margin-bottom: 28px; color: var(--muted); font-size: 17px; }
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0 22px;
+      border: 1px solid var(--rose-deep);
+      border-radius: 999px;
+      color: #fff;
+      background: var(--rose-deep);
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(143, 92, 100, .2);
+      transition: transform .25s ease, background .25s ease;
+    }
+    .button:hover { background: #774a54; transform: translateY(-2px); }
+    .button.secondary { color: var(--rose-deep); background: transparent; box-shadow: none; }
+    .hero-art {
+      position: relative;
+      display: grid;
+      min-height: 270px;
+      place-items: center;
+      border-radius: 46% 46% 24px 24px;
+      background: radial-gradient(circle at 55% 42%, #fff8f1 0 15%, transparent 16%),
+        radial-gradient(circle at 24% 24%, #d99da0 0 5%, transparent 5.5%),
+        radial-gradient(circle at 73% 25%, #e8b8af 0 7%, transparent 7.5%),
+        radial-gradient(circle at 45% 67%, #c78489 0 11%, transparent 11.5%),
+        linear-gradient(145deg, #ead8cc, #c1c7b6);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .hero-art::after { content: "✦"; position: absolute; top: 28%; left: 41%; color: #fff8f1; font-size: 72px; opacity: .85; }
+    .art-caption { z-index: 1; align-self: end; margin-bottom: 26px; color: #fffaf6; font-size: 13px; letter-spacing: .18em; }
+
+    .section-heading { margin-bottom: 30px; }
+    h2 { margin-bottom: 9px; font-size: clamp(28px, 7vw, 44px); font-weight: 500; letter-spacing: .08em; line-height: 1.3; }
+    h3 { margin-bottom: 7px; font-size: 19px; font-weight: 600; }
+    .section-heading p, .muted { color: var(--muted); }
+    .story-grid, .price-grid, .faq-grid { display: grid; gap: 16px; }
+    .story-card, .price-card, .faq-item, .contact-card { padding: 24px; border: 1px solid var(--line); border-radius: var(--radius); background: rgba(255,255,255,.38); }
+    .story-card.accent { color: #fffaf6; background: var(--rose-deep); border-color: transparent; }
+    .story-card.accent p { color: #f7e8e3; }
+    .number { display: block; margin-bottom: 18px; color: var(--rose); font-size: 12px; letter-spacing: .16em; }
+    .accent .number { color: #edc5bd; }
+    .price-card { display: flex; flex-direction: column; min-height: 238px; }
+    .price-card .service { display: flex; justify-content: space-between; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+    .price-card .service:last-child { border-bottom: 0; }
+    .price-card strong { color: var(--rose-deep); font-weight: 600; white-space: nowrap; }
+    .price-note { margin-top: auto; padding-top: 16px; color: var(--muted); font-size: 13px; }
+    .faq-item summary { cursor: pointer; font-weight: 600; }
+    .faq-item p { margin: 12px 0 0; color: var(--muted); }
+    .contact-card { margin-top: 24px; background: var(--paper-deep); }
+    .contact-card p { margin-bottom: 0; color: var(--muted); }
+    footer { padding: 20px 0 0; color: var(--muted); font-size: 12px; letter-spacing: .08em; }
+
+    @media (min-width: 700px) {
+      .site-header { padding: 16px 28px; }
+      .brand-name { font-size: 16px; }
+      .nav-link { padding: 8px 13px; font-size: 13px; }
+      main { padding: 104px 38px 64px; }
+      .hero { grid-template-columns: 1.05fr .95fr; min-height: calc(100vh - 170px); gap: 70px; }
+      .hero-art { min-height: 490px; }
+      .story-grid, .price-grid { grid-template-columns: repeat(2, 1fr); }
+      .faq-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation: none !important; transition: none !important; }
+      .page.is-active { opacity: 1 !important; transform: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="nav-wrap">
+      <a class="brand" href="#home" data-page="home" aria-label="返回繁花美學首頁">
+        <span class="brand-mark">✿</span><span class="brand-name">繁花美學</span>
+      </a>
+      <nav class="main-nav" aria-label="主要導覽">
+        <button class="nav-link is-active" type="button" data-page="home">首頁</button>
+        <button class="nav-link" type="button" data-page="about">關於我們</button>
+        <button class="nav-link" type="button" data-page="nails">美甲價格</button>
+        <button class="nav-link" type="button" data-page="lashes">美睫價格</button>
+        <button class="nav-link" type="button" data-page="faq">常見問題</button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="page is-active" id="home" aria-labelledby="home-title">
+      <div class="hero">
+        <div>
+          <p class="eyebrow">BLOOM INTO YOUR BEAUTY</p>
+          <h1 id="home-title">讓美，成為<br><em>日常的花。</em></h1>
+          <p class="lead">在繁花美學，我們相信每一次溫柔的整理，都是重新愛上自己的開始。</p>
+          <button class="button" type="button" data-page="nails">探索服務與價格　→</button>
+        </div>
+        <div class="hero-art" aria-label="柔和花朵色彩的裝飾圖形">
+          <span class="art-caption">NAIL · LASH · BEAUTY</span>
+        </div>
+      </div>
+      <footer>© 2024 繁花美學　｜　預約制美甲・美睫工作室</footer>
+    </section>
+
+    <section class="page" id="about" aria-labelledby="about-title">
+      <div class="section-heading"><p class="eyebrow">OUR PHILOSOPHY</p><h2 id="about-title">關於我們</h2><p>一間讓你慢下來，也讓自己發光的美學空間。</p></div>
+      <div class="story-grid">
+        <article class="story-card accent"><span class="number">01 / CARE</span><h3>細節，是我們的溫柔</h3><p>從消毒、修型到最後的保養，每一個步驟都為了讓你安心，也讓美好停留得更久。</p></article>
+        <article class="story-card"><span class="number">02 / STYLE</span><h3>找到適合你的風格</h3><p>不追逐單一流行，依照你的生活、氣質與喜好，設計自然又有辨識度的專屬造型。</p></article>
+        <article class="story-card"><span class="number">03 / SPACE</span><h3>留一段自己的時間</h3><p>一對一預約，保留安靜而舒服的節奏，讓每次來訪都像給自己的小小獎勵。</p></article>
+      </div>
+      <div class="contact-card"><h3>來坐坐吧</h3><p>台北市大安區・捷運步行 5 分鐘<br>營業時間｜週二至週日 11:00–20:00</p></div>
+    </section>
+
+    <section class="page" id="nails" aria-labelledby="nails-title">
+      <div class="section-heading"><p class="eyebrow">NAIL MENU</p><h2 id="nails-title">美甲價格</h2><p>細緻的手部風景，從基礎保養開始。</p></div>
+      <div class="price-grid">
+        <article class="price-card"><h3>基礎保養</h3><div class="service"><span>手部基礎保養</span><strong>NT$ 800</strong></div><div class="service"><span>單色凝膠</span><strong>NT$ 1,200</strong></div><div class="service"><span>卸甲（本店）</span><strong>NT$ 200</strong></div><p class="price-note">含基礎修型、甘皮整理與指緣保養。</p></article>
+        <article class="price-card"><h3>設計款式</h3><div class="service"><span>簡約設計款</span><strong>NT$ 1,500 起</strong></div><div class="service"><span>手繪藝術款</span><strong>NT$ 1,800 起</strong></div><div class="service"><span>法式／跳色</span><strong>NT$ 1,400 起</strong></div><p class="price-note">款式與加購項目依現場討論報價。</p></article>
+      </div>
+    </section>
+
+    <section class="page" id="lashes" aria-labelledby="lashes-title">
+      <div class="section-heading"><p class="eyebrow">LASH MENU</p><h2 id="lashes-title">美睫價格</h2><p>輕盈、自然，讓你的眼神保有自己的故事。</p></div>
+      <div class="price-grid">
+        <article class="price-card"><h3>自然系列</h3><div class="service"><span>自然單根 80 根</span><strong>NT$ 1,200</strong></div><div class="service"><span>自然單根 100 根</span><strong>NT$ 1,500</strong></div><div class="service"><span>輕柔濃密款</span><strong>NT$ 1,800</strong></div><p class="price-note">依照眼型與睫毛狀況，現場提供適合建議。</p></article>
+        <article class="price-card"><h3>保養與卸除</h3><div class="service"><span>本店卸睫</span><strong>NT$ 200</strong></div><div class="service"><span>他店卸睫</span><strong>NT$ 300</strong></div><div class="service"><span>睫毛深層修護</span><strong>NT$ 300</strong></div><p class="price-note">建議每 3–4 週回來補睫，維持漂亮狀態。</p></article>
+      </div>
+    </section>
+
+    <section class="page" id="faq" aria-labelledby="faq-title">
+      <div class="section-heading"><p class="eyebrow">GOOD TO KNOW</p><h2 id="faq-title">常見問題</h2><p>第一次來也不用緊張，這裡先替你整理好了。</p></div>
+      <div class="faq-grid">
+        <details class="faq-item" open><summary>需要提前預約嗎？</summary><p>我們採全預約制，建議提前 1–2 週預約。臨時有空檔也歡迎私訊詢問。</p></details>
+        <details class="faq-item"><summary>可以帶朋友一起來嗎？</summary><p>為維持舒適與專注的服務品質，每位客人最多一位陪同者。</p></details>
+        <details class="faq-item"><summary>第一次做美甲要注意什麼？</summary><p>不需要事前自行修剪指甲，保留原本長度即可，現場會一起討論最適合的形狀。</p></details>
+        <details class="faq-item"><summary>如何更改或取消預約？</summary><p>請於預約前 24 小時告知；臨時取消或未到店，將酌收下次預約保留費。</p></details>
+      </div>
+      <div class="contact-card"><h3>還有其他問題嗎？</h3><p>歡迎透過 Instagram 或 LINE 與我們聯繫，我們會在營業時間內回覆你。</p></div>
+    </section>
+  </main>
+
+  <script>
+    const pages = [...document.querySelectorAll('.page')];
+    const links = [...document.querySelectorAll('[data-page]')];
+
+    function showPage(pageId, updateUrl = true) {
+      const target = document.getElementById(pageId) || document.getElementById('home');
+      pages.forEach((page) => page.classList.toggle('is-active', page === target));
+      document.querySelectorAll('.nav-link').forEach((link) => {
+        const active = link.dataset.page === target.id;
+        link.classList.toggle('is-active', active);
+        link.setAttribute('aria-current', active ? 'page' : 'false');
+      });
+      if (updateUrl) history.replaceState(null, '', `#${target.id}`);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    links.forEach((link) => link.addEventListener('click', () => showPage(link.dataset.page)));
+    window.addEventListener('hashchange', () => showPage(location.hash.slice(1), false));
+    showPage(location.hash.slice(1) || 'home', false);
+  </script>
+</body>
+</html>
